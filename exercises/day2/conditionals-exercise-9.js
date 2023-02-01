@@ -30,7 +30,12 @@ const rl = readline.createInterface({
 });
 
 
-// asks users to input a number
+/*
+
+asks users to input a number and informs them if the number is equal to, greater to, or
+less than ten:
+
+*/
 rl.question("write a number: ", function(num) {
 
 	let n = parseFloat(num);	// converts string into a floating-point number
