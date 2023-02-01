@@ -31,7 +31,7 @@ const rl = readline.createInterface({
 
 
 // asks users for their birth year and prints their age on the console
-rl.question("input your birthyear (four digits): ", function(birthYear) {
+rl.question("input your birth year (four digits): ", function(birthYear) {
 	// gets the current year from Date instance
 	const thisYear = new Date().getFullYear()
 	// calculates the age of the user
