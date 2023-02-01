@@ -37,7 +37,7 @@ rl.question("enter a phrase: ", function(msg) {
 		// defines the number of repetitions
 		const reps = parseInt(num)
 
-		// displays the message on the console ten times
+		// displays the message on the console `num' times
 		for (let i = 0; i != reps; ++i)
 		{
 			console.log(`${msg}`);

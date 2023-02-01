@@ -30,7 +30,7 @@ const rl = readline.createInterface({
 });
 
 
-// asks the user to input a phrase and then it prints it ten times on the console
+// asks the user to input two numbers `b' and `e', then prints the numbers in [b, e]:
 rl.question("enter an integral number: ", function(first) {
 	rl.question("enter a number greater than the first: ", function(second) {
 
