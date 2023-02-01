@@ -30,7 +30,12 @@ const rl = readline.createInterface({
 });
 
 
-// asks users for their weight and height
+/*
+
+asks users for their weight and height, calculates their BMI, and informs them if they
+are underweight, overweight, etc.
+
+*/
 rl.question("input your weight in kilograms: ", function(w) {
 	rl.question("input your height in meters: ", function(h) {
 	// calculates the BMI of the user
