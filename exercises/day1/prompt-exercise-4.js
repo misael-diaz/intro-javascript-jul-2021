@@ -17,6 +17,7 @@ References:
 	stackoverflow.com/questions/61394928/get-user-input-through-node-js-console
 [1] string to numeric methods:
 www.w3docs.com/snippets/javascript/how-to-convert-string-to-number-in-javascript.html
+[2] using the Date class to get the current year: www.w3schools.com/js/js_dates.asp
 
 */
 
