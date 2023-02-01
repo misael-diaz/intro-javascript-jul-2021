@@ -31,7 +31,7 @@ const rl = readline.createInterface({
 });
 
 
-// asks users to input a number
+// asks users to input a number and informs them if the number is a multiple of five
 rl.question("input any number: ", function(num) {
 
 	// checks if the number is divisible by five and reports the outcome
