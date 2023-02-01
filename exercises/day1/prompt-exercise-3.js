@@ -15,7 +15,7 @@ by the Free Software Foundation, either version 3 of the License, or
 References:
 [0] Getting input from user via nodejs:
 	stackoverflow.com/questions/61394928/get-user-input-through-node-js-console
-[1] to string methods:
+[1] string to numeric methods:
 www.w3docs.com/snippets/javascript/how-to-convert-string-to-number-in-javascript.html
 
 */
@@ -29,13 +29,12 @@ const rl = readline.createInterface({
 });
 
 
-// asks users to input two numbers and prints the sum on the console
+// asks users to input two numbers and prints their sum on the console
 rl.question("write a number: ", function(x1) {
 	rl.question("write another number: ", function(x2) {
-	console.log(`first ${x1} and second ${x2}`)
 	// converts numeric input to floating-point numbers and adds them
 	let sum = parseFloat(x1) + parseFloat(x2)
-	console.log(`sum ${sum}`)
+	console.log(`their sum is equal to ${sum}`)
 	rl.close();
 	});
 });

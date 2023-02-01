@@ -15,7 +15,7 @@ by the Free Software Foundation, either version 3 of the License, or
 References:
 [0] Getting input from user via nodejs:
 	stackoverflow.com/questions/61394928/get-user-input-through-node-js-console
-[1] to string methods:
+[1] string to numeric methods:
 www.w3docs.com/snippets/javascript/how-to-convert-string-to-number-in-javascript.html
 
 */
@@ -29,11 +29,10 @@ const rl = readline.createInterface({
 });
 
 
-// asks users for their weight and height
+// asks users for their weight and height and prints their BMI
 rl.question("input your weight in kilograms: ", function(w) {
 	rl.question("input your height in meters: ", function(h) {
-	// gets the current year from Date instance
-	// calculates the age of the user
+	// calculates the BMI of the users
 	let BMI = w / (h * h)
 	console.log(`your BMI is ${BMI}`)
 	rl.close();
