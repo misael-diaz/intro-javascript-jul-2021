@@ -27,7 +27,7 @@ const rl = readline.createInterface({
 });
 
 
-// asks users to input their name
+// asks users to input their name and greets them as indicated in the problem
 rl.question("write your name: ", function(nm) {
 	console.log(`Hello ${nm}!`);
 	rl.close();
