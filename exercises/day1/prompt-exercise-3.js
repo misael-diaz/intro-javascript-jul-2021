@@ -32,7 +32,6 @@ const rl = readline.createInterface({
 // asks users to input two numbers and prints their sum on the console
 rl.question("write a number: ", function(x1) {
 	rl.question("write another number: ", function(x2) {
-	console.log(`first ${x1} and second ${x2}`)
 	// converts numeric input to floating-point numbers and adds them
 	let sum = parseFloat(x1) + parseFloat(x2)
 	console.log(`sum ${sum}`)
