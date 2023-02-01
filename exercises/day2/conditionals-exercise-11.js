@@ -30,7 +30,13 @@ const rl = readline.createInterface({
 });
 
 
-// asks users to input a number
+/*
+
+asks users to input a number, prints `bingbong' if the number is both a multiple of
+three and five, prints `bing' if it is a multiple of three, prints `bong' if it is
+a multiple of five, and prints the number otherwise.
+
+*/
 rl.question("write a number: ", function(num) {
 
 	let n = parseFloat(num);	// converts string into a floating-point number
