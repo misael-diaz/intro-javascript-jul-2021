@@ -29,7 +29,7 @@ const rl = readline.createInterface({
 });
 
 
-// asks users for their weight and height
+// asks users for their weight and height and prints their BMI
 rl.question("input your weight in kilograms: ", function(w) {
 	rl.question("input your height in meters: ", function(h) {
 	// gets the current year from Date instance
