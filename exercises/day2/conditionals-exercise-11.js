@@ -37,9 +37,9 @@ three and five, prints `bing' if it is a multiple of three, prints `bong' if it 
 a multiple of five, and prints the number otherwise.
 
 */
-rl.question("write a number: ", function(num) {
+rl.question("enter an integral number: ", function(num) {
 
-	let n = parseFloat(num);	// converts string into a floating-point number
+	let n = parseInt(num);	// converts string into an integer
 
 	if (n % 3 == 0)
 	// it is a multiple of three
