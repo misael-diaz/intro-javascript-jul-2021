@@ -29,7 +29,7 @@ const rl = readline.createInterface({
 });
 
 
-// asks users to input two numbers and prints the sum on the console
+// asks users to input two numbers and prints their sum on the console
 rl.question("write a number: ", function(x1) {
 	rl.question("write another number: ", function(x2) {
 	console.log(`first ${x1} and second ${x2}`)
