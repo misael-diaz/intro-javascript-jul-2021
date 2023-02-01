@@ -15,7 +15,7 @@ by the Free Software Foundation, either version 3 of the License, or
 References:
 [0] Getting input from user via nodejs:
 	stackoverflow.com/questions/61394928/get-user-input-through-node-js-console
-[1] to string methods:
+[1] string to numeric methods:
 www.w3docs.com/snippets/javascript/how-to-convert-string-to-number-in-javascript.html
 
 */
