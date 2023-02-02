@@ -177,7 +177,7 @@ rl.question("enter a phrase> ", function (msg1) {
 
 /*
  * COMMENTS:
- * The time complexity of this application is O(N1 * N2), where N1 is the number of
+ * The time complexity of this application is O(max(N1 * N1, N1 * N2)), where N1 is the number of
  * characters in the first message and N2 is the number of characters in the second
  * message, for the limiting process is the linear search. We could stop searching
  * as soon as an instance is found but that is not going to improve the average time
