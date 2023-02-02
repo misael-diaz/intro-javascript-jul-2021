@@ -39,6 +39,66 @@ const rl = readline.createInterface({
 });
 
 
+// implementations:
+
+
+function distinct (msg)
+/*
+
+Synopsis:
+Implements a Brute Force algorithm that finds distinct characters in a string.
+Returns a string containing the distinct characters in the message `msg'.
+The time complexity of the Brute Force Algorithm is quadratic with respect to the
+number of characters in the string `msg'.
+
+*/
+{
+
+	// initializes partition array
+	let partition = new Array(msg.length);
+	for (let i = 0; i != msg.length; ++i)
+	{
+		partition[i] = -1;
+	}
+
+
+	// traverses the message in search for duplicate characters (chars)
+	for (let i = 0; i != (msg.length - 1); ++i)
+	{
+		for (let j = (i + 1); j != msg.length; ++j)
+		{
+			// checks the jth char if it has not been marked as a duplicate,
+			// if it is unmarked, then it checks if it is a duplicate of the
+			// ith char
+			if (partition[j] == -1 &&  msg[j] == msg[i])
+			{
+				// sets the ith char as the parent of the jth char,
+				// for the jth char is a duplicate of the ith char
+				partition[j] = i;
+				// increments the number of instances of the ith char
+				--partition[i];
+			}
+		}
+	}
+
+
+	let str = new String();
+	// appends the string with the distinct characters in `msg'
+	for (let i = 0; i != msg.length; ++i)
+	{
+		if (partition[i] < 0)
+		{
+			str += msg[i];
+		}
+	}
+
+	return str;
+}
+
+
+// main:
+
+
 // reports the common characters in the messages input by the users
 
 
@@ -47,7 +107,7 @@ rl.question("enter a phrase> ", function (msg1) {
 	rl.question("enter another phrase> ", function (msg2) {
 
 		// creates strings from the messages
-		let str1 = new String(msg1);
+		let str1 = distinct(msg1);
 		let str2 = new String(msg2);
 
 
