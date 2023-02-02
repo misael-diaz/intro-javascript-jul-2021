@@ -183,4 +183,10 @@ rl.question("enter a phrase> ", function (msg1) {
  * searching as soon as an instance is found but that is not going to improve the
  * average time complexity of the application, the extra effort would not be worthwhile.
  *
+ * The application can be optimized by implementing a distinct() method that sorts the
+ * string prior to the look up of the distinct characters. The overall time complexity
+ * would be determined by the sorting algorithm O(N * log(N)) for one can easily store the
+ * distinct characters in linear time. And replacing the linear search with a binary
+ * search will yield an overall runtime of O( max(N1 * log(N1), N1 * log(N2)) ).
+ *
  */
