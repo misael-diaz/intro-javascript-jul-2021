@@ -53,6 +53,9 @@ number of characters in the string `msg'.
 
 */
 {
+	// removes whitespace from the message so that it won't show up in the list of
+	// common characters
+	msg = removeWhiteSpace(msg);
 
 	// initializes partition array
 	let partition = new Array(msg.length);
@@ -93,6 +96,22 @@ number of characters in the string `msg'.
 	}
 
 	return str;
+}
+
+
+function removeWhiteSpace (msg)
+// returns a string without whitespace
+{
+        let str = new String();
+        for (let i = 0; i != msg.length; ++i)
+        {
+                if (msg[i] != ' ')
+                {
+                        str += msg[i];
+                }
+        }
+
+        return str;
 }
 
 
