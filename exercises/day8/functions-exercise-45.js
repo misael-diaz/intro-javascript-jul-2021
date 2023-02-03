@@ -1,6 +1,6 @@
 /*
 
-source: functions-exercise-44.js
+source: functions-exercise-45.js
 author: @misael-diaz
 date:   2023-02-02
 
