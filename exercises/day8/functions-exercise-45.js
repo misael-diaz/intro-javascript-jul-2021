@@ -1,6 +1,6 @@
 /*
 
-source: functions-exercise-44.js
+source: functions-exercise-45.js
 author: @misael-diaz
 date:   2023-02-02
 
@@ -26,7 +26,6 @@ stackoverflow.com/questions/4366104/traverse-through-javascript-object-propertie
 https://stackoverflow.com/questions/9329446/loop-for-each-over-an-array-in-javascript
 [5] filter:
 developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter
-[6] map: www.freecodecamp.org/news/how-to-clone-an-array-in-javascript-1d3183468f6a/
 
 */
 
@@ -34,32 +33,26 @@ developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/f
 // implementations:
 
 
-function multiply (numbers, n)
-// multiplies the elements of the array with the scalar `n'
+function cheapProducts (prods)
+// returns an array of products in accordance with the requirements of this exercise
 {
-	const nums = numbers.map(elem => 2 * elem);
-	return nums;
+	return prods.filter(p => (p.cost >= 5 && p.cost <= 10) );
 }
 
 
 // main:
 
 
-numel = 16;
-let numbers = new Array();
-// pushes the sequence in the asymmetric range [0, 16) unto the back the array
-for (let i = 0; i != numel; ++i)
-{
-	numbers.push(i);
-}
+let prods = [
+  { name: "rice",   cost:  5 },
+  { name: "bread",  cost:  3 },
+  { name: "tomato", cost:  8 },
+  { name: "milk",   cost: 15 }
+];
 
 
-// copies the doubled values of the array `numbers' into the new array `nums'
-const nums = multiply(numbers, 2);
-
-
-// displays their values on the console
-for (let i = 0; i != numel; ++i)
-{
-	console.log(`${numbers[i]} ${nums[i]}`);
-}
+// displays the cheap products on the console
+let cheap = cheapProducts(prods);
+cheap.forEach(p => {
+	console.log(`${p.name}`);
+});
