@@ -24,7 +24,7 @@ www.w3docs.com/snippets/javascript/how-to-convert-string-to-number-in-javascript
 stackoverflow.com/questions/4366104/traverse-through-javascript-object-properties
 [4] for-each:
 https://stackoverflow.com/questions/9329446/loop-for-each-over-an-array-in-javascript
-[5]: filter:
+[5] filter:
 developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter
 
 */
