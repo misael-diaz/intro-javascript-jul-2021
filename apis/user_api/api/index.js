@@ -18,6 +18,7 @@ References:
 [0] API: https://www.ibm.com/topics/api
 [1] NODEJS REST API: https://medium.com/bb-tutorials-and-thoughts/how-to-write-production-ready-node-js-rest-api-javascript-version-db64d3941106
 [2] POST with curl: stackoverflow.com/questions/7172784/how-do-i-post-json-data-with-curl
+[3] database: https://github.com/jestrade/api-twitter
 
 */
 
@@ -26,7 +27,9 @@ References:
 var express = require("express");
 var bodyParser = require("body-parser");
 var logger = require("../logs");
+var db = require("../db");
 
+db.connect();		// connects to the database
 
 var app = express();	// instantiates app
 const port = 3070;	// defines the service port for this app
