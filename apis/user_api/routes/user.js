@@ -18,13 +18,15 @@ References:
 [0] API: https://www.ibm.com/topics/api
 [1] NODEJS REST API: https://medium.com/bb-tutorials-and-thoughts/how-to-write-production-ready-node-js-rest-api-javascript-version-db64d3941106
 [2] POST with curl: stackoverflow.com/questions/7172784/how-do-i-post-json-data-with-curl
-
+[3] mongodb: https://kb.objectrocket.com/mongo-db/simple-mongoose-and-node-js-example-1007
 */
 
 
 // imports dependencies
-var express = require("express");
-var logger = require("../logs");
+var express   = require("express");
+const logger  = require("../logs");
+const model   = require("../routes/model");
+const handler = require("../routes/handler");
 
 
 // instantiates user app
@@ -33,12 +35,18 @@ var app = express();
 
 // initializes an array of user (objects)
 let users = [{firstName:"fnam1",lastName:"lnam1",userName:"username1"}];
+// inserts users to the database (NOTE: handler.add() needs revision to avert redundancy)
+handler.add(users);
+
 
 
 // answers GET request to get all the users
 app.get("/users", (req, res) => {
-	logger.info("users route");
-	res.json(users);
+// fetches all users from the database
+
+	logger.info("all users route");
+	handler.find(req, res, {});
+
 });
 
 
@@ -46,10 +54,8 @@ app.get("/users", (req, res) => {
 app.get("/users/:userName", (req, res) => {
 
 	// example: http://localhost:${port}/users/username1 yields info about user1
-	let usrs = users.filter( user => (req.params.userName == user.userName) );
+	handler.find(req, res);
 	logger.info("filtered users by username");
-	res.json(usrs);
-
 });
 
 
@@ -70,13 +76,20 @@ http://localhost:3070/api/user/user
 
 app.post("/user", (req, res) => {
 
-	// inserts new user at the back of the array of users
-	users.push(req.body);
+	const user = req.body;
+	handler.add(user);
 	logger.info("stored new user");
-	res.json(users);
-
+	res.json(user);
 });
 
 
 // exports user app
 module.exports = app;
+
+
+/*
+ * TODO:
+ * [x] udpate POST so that the user gets added to the database
+ * [ ] modify the code so that there are no duplicate users
+ *
+ */
