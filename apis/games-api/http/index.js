@@ -26,8 +26,9 @@ References:
 const express = require("express");
 const bodyParser = require("body-parser");
 const api = require("../api");
+const { http } = require("../config");
+const { port } = http;
 const app = express();
-const port = 8080
 
 // configure the app
 app.use(bodyParser.json());

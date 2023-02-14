@@ -24,11 +24,13 @@ References:
 */
 
 const mongoose = require("mongoose");
-const { db, port } = { db:"RetroGamesDB", port:"27017" };
+const { db } = require("../config");
+const { connectionString } = db;
+
 
 const connect = async () => {
 // attemps to connect to the database db
-	const url = `mongodb://${db}:${port}/details`;
+	const url = connectionString;
 	const opt = {
 		useUnifiedTopology: true,
 		useNewUrlParser: true
