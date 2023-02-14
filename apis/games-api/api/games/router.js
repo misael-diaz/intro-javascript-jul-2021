@@ -62,7 +62,7 @@ app.get("/games/:name", (req, res) => {
 
 curl --header "Content-Type: application/json" --request POST \
 --data \
-'{"name":"Halo", "console":["Xbox"], "genre":"First-Person Shooter", "release":"2001"}' \
+'{"name":"Halo2", "console":["Xbox"], "genre":"First-Person Shooter", "release":"2004"}' \
 http://localhost:8080/api/game/game
 
 */
