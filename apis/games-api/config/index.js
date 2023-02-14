@@ -20,6 +20,7 @@ References:
 [1] NODEJS REST API: https://medium.com/bb-tutorials-and-thoughts/how-to-write-production-ready-node-js-rest-api-javascript-version-db64d3941106
 [2] POST with curl: stackoverflow.com/questions/7172784/how-do-i-post-json-data-with-curl
 [3] database: https://github.com/jestrade/api-twitter
+[4] config: https://github.com/jestrade/api-make-it-real-2021/blob/main/config/index.js
 
 */
 
