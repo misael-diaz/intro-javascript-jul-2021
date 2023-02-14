@@ -126,3 +126,12 @@ handler.put = async function(req, res, filter = {name: req.params.name}) {
 
 // exports handler
 module.exports = handler;
+
+
+/*
+ * TODO:
+ * [ ] add code to prevent adding a game with the same name as an existing game in the
+ *     database. It seems that the exists() method inspects the game properties
+ *     thoroughly so that if there is one mismatch it considers the game as new.
+ *
+ */
