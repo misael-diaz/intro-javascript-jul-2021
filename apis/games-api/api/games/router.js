@@ -75,5 +75,22 @@ app.post("/game", (req, res) => {
 
 });
 
+
+// handles PUT requests:
+
+
+/*
+
+curl --header "Content-Type: application/json" --request PUT \
+--data '{"console":["PC","Xbox"]}' http://localhost:8080/api/game/update/Halo2
+
+*/
+
+
+app.put("/update/:name", (req, res) => {
+	handler.put(req, res);
+});
+
+
 // exports games app
 module.exports = app;

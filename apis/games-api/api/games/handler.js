@@ -22,6 +22,8 @@ References:
 [3] mongodb: https://kb.objectrocket.com/mongo-db/simple-mongoose-and-node-js-example-1007
 [4] mongodb: https://codeforgeek.com/insert-a-document-into-mongodb-using-mongoose/
 [5] controller: https://github.com/jestrade/api-twitter
+[6] update: https://mongoosejs.com/docs/tutorials/findoneandupdate.html
+[7] towardsdatascience.com/build-a-rest-api-with-node-express-and-mongodb-937ff95f23a5
 
 */
 
@@ -98,6 +100,24 @@ handler.find = function(req, res, key = {name: req.params.name}) {
 			res.send(obj);
 			console.info(`found game(s) in database successfully!`);
 		}
+
+	});
+
+};
+
+
+handler.put = async function(req, res, filter = {name: req.params.name}) {
+// updates the first game that matches the filter
+
+	const update = req.body;
+	await model.findOneAndUpdate(filter, update).then( (gm) => {
+
+		model.findOne(filter).then( (g) => {
+
+			res.send(g);
+			console.info(`updated game successfully!`);
+
+		});
 
 	});
 
