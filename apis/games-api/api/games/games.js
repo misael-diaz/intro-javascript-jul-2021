@@ -67,7 +67,7 @@ const SuperMetroid = {
 const Halo = {
 	//name: "Halo: Combat Evolved",
 	name: "Halo",
-	console: ["Xbox"],
+	console: ["PC", "Xbox"],
 	genre: "First-Person Shooter",
 	release: 2001
 };
