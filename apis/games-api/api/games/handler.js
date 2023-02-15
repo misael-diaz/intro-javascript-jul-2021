@@ -24,6 +24,7 @@ References:
 [5] controller: https://github.com/jestrade/api-twitter
 [6] update: https://mongoosejs.com/docs/tutorials/findoneandupdate.html
 [7] towardsdatascience.com/build-a-rest-api-with-node-express-and-mongodb-937ff95f23a5
+[8] chaining callbacks: https://stackoverflow.com/questions/3884281/what-does-the-function-then-mean-in-javascript/31453579#31453579
 
 */
 
