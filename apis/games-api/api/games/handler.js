@@ -46,12 +46,14 @@ handler.add = async function(games) {
 
 	if (games instanceof Array)
 	{
-		await model.insertMany(games, (err, obj) => {
+		await model.insertMany(games).then( (gms) => {
 
-			if (err)
-				console.error(`failed to insert games to the database`);
-			else
-				console.info(`inserted games to the database`);
+			console.info(`inserted games to the database`);
+
+		}).catch( (err) => {
+
+			console.error(`failed to insert games to the database`);
+
 		});
 	}
 	else
@@ -63,25 +65,25 @@ handler.add = async function(games) {
 		// Waits until checking is done to determine if the game is to be saved
 		// or if there is nothing to do because it is already in the database.
 		// The method then() enable us to achive just that.
-		await model.exists(games).then( (g) => {
+		const gm = await model.exists(games).exec();
 
-			if (g != null)
-			{
-				console.log(`game exist in db`);
-			}
-			else
-			{
-				const game = new model(games);
-				game.save( (err, obj) => {
+		if (gm != null)
+		{
+			console.log(`game exist in db`);
+		}
+		else
+		{
+			const game = new model(games);
+			game.save().then( (g) => {
 
-					if (err)
-						console.error(`save game in db failed`);
-					else
-						console.log(`saved game in db`);
-				});
-			}
-		});
+				console.log(`saved game in db`);
 
+			}).catch( (err) => {
+
+				console.error(`save game in db failed`);
+
+			});
+		}
 	}
 };
 
