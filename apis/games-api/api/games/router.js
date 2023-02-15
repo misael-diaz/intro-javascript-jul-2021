@@ -92,5 +92,20 @@ app.put("/update/:name", (req, res) => {
 });
 
 
+// handles DELETE requests:
+
+
+/*
+
+curl --request DELETE http://localhost:8080/api/game/delete/Halo2
+
+*/
+
+
+app.delete("/delete/:name", (req, res) => {
+	handler.delete(req, res);
+});
+
+
 // exports games app
 module.exports = app;

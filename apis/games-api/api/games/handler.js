@@ -124,6 +124,19 @@ handler.put = async function(req, res, filter = {name: req.params.name}) {
 };
 
 
+handler.delete = async function(req, res, filter = {name: req.params.name}) {
+// deletes the first game that matches the filter
+
+	await model.findOneAndDelete(filter).then( (g) => {
+
+		res.send(g);
+		console.info(`deleted game successfully!`);
+
+	});
+
+};
+
+
 // exports handler
 module.exports = handler;
 
