@@ -85,22 +85,21 @@ handler.add = async function(games) {
 };
 
 
-handler.find = function(req, res, key = {name: req.params.name}) {
+handler.find = async function(req, res, key = {name: req.params.name}) {
 // fetches game(s) matching name in the database by default
 
-	model.find(key, (err, obj) => {
+	await model.find(key).exec().then( (err, obj) => {
 
 		if (err)
 		{
-			res.send(err);
 			console.error(`failed to find game(s) in database`);
+			res.send(err);
 		}
 		else
 		{
-			res.send(obj);
 			console.info(`found game(s) in database successfully!`);
+			res.send(obj);
 		}
-
 	});
 
 };
@@ -110,16 +109,10 @@ handler.put = async function(req, res, filter = {name: req.params.name}) {
 // updates the first game that matches the filter
 
 	const update = req.body;
-	await model.findOneAndUpdate(filter, update).then( () => {
-
-		model.findOne(filter).then( (g) => {
-
-			res.send(g);
-			console.info(`updated game successfully!`);
-
-		});
-
-	});
+	await model.findOneAndUpdate(filter, update).exec();
+	await model.findOne(filter).exec();
+	console.info(`updated game successfully!`);
+	res.send('game has been updated successfully');
 
 };
 
@@ -127,12 +120,9 @@ handler.put = async function(req, res, filter = {name: req.params.name}) {
 handler.delete = async function(req, res, filter = {name: req.params.name}) {
 // deletes the first game that matches the filter
 
-	await model.findOneAndDelete(filter).then( (g) => {
-
-		res.send(g);
-		console.info(`deleted game successfully!`);
-
-	});
+	await model.findOneAndDelete(filter).exec();
+	console.info(`deleted game successfully!`);
+	res.send('game has been deleted successfully');
 
 };
 
