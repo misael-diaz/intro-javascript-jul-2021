@@ -64,7 +64,7 @@ handler.add = async function(games) {
 		// Note:
 		// Waits until checking is done to determine if the game is to be saved
 		// or if there is nothing to do because it is already in the database.
-		// The method then() enable us to achive just that.
+		// The method exec() enable us to achive that.
 		const gm = await model.exists(games).exec();
 
 		if (gm != null)
@@ -74,15 +74,12 @@ handler.add = async function(games) {
 		else
 		{
 			const game = new model(games);
-			game.save().then( (g) => {
+			const g = await game.save();
 
+			if (g != null)
 				console.log(`saved game in db`);
-
-			}).catch( (err) => {
-
+			else
 				console.error(`save game in db failed`);
-
-			});
 		}
 	}
 };
