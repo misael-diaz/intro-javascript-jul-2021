@@ -110,7 +110,7 @@ handler.put = async function(req, res, filter = {name: req.params.name}) {
 // updates the first game that matches the filter
 
 	const update = req.body;
-	await model.findOneAndUpdate(filter, update).then( (gm) => {
+	await model.findOneAndUpdate(filter, update).then( () => {
 
 		model.findOne(filter).then( (g) => {
 
