@@ -62,7 +62,7 @@ handler.add = async function(games) {
 		// Waits until checking is done to determine if the game is to be saved
 		// or if there is nothing to do because it is already in the database.
 		// The method then() enable us to achive just that.
-		const g = await model.exists(games).then( (g) => {
+		await model.exists(games).then( (g) => {
 
 			if (g != null)
 			{
