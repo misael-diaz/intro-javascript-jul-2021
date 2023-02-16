@@ -40,13 +40,13 @@ const model = require("../../api/games/model");
 let handler = {};
 
 
-handler.rm = async function () {
+handler.rm = async () => {
 // removes all the games from the database
 	await model.deleteMany({}).exec();	// exec() returns promise (refs [9] & [C])
 }
 
 
-handler.add = async function(req, res, games) {
+handler.add = async (req, res, games) => {
 // adds game(s) to the database db (NOTE: does not check if the data is already in the db)
 
 	if (games instanceof Array)
@@ -69,7 +69,7 @@ handler.add = async function(req, res, games) {
 
 		const key = { name: req.body.name };
 		// Note: model.findOne().exec() returns a Promise
-		await model.findOne(key).exec().then( async function(gm) {
+		await model.findOne(key).exec().then( async (gm) => {
 
 			if (gm != null)
 			{
@@ -92,7 +92,7 @@ handler.add = async function(req, res, games) {
 };
 
 
-handler.find = async function(req, res, key = {name: req.params.name}) {
+handler.find = async (req, res, key = {name: req.params.name}) => {
 // fetches game(s) matching name in the database by default
 
 	// Note: model.find().exec() returns a Promise
@@ -118,7 +118,7 @@ handler.find = async function(req, res, key = {name: req.params.name}) {
 };
 
 
-handler.put = async function(req, res, filter = {name: req.params.name}) {
+handler.put = async (req, res, filter = {name: req.params.name}) => {
 // updates the first game that matches the filter
 
 	const update = req.body;
@@ -138,7 +138,7 @@ handler.put = async function(req, res, filter = {name: req.params.name}) {
 };
 
 
-handler.delete = async function(req, res, filter = {name: req.params.name}) {
+handler.delete = async (req, res, filter = {name: req.params.name}) => {
 // deletes the first game that matches the filter
 
 	await model.findOneAndDelete(filter).exec().then( () => {
