@@ -23,8 +23,13 @@ References:
 [4] mongodb: https://codeforgeek.com/insert-a-document-into-mongodb-using-mongoose/
 [5] controller: https://github.com/jestrade/api-twitter
 [6] update: https://mongoosejs.com/docs/tutorials/findoneandupdate.html
-[7] towardsdatascience.com/build-a-rest-api-with-node-express-and-mongodb-937ff95f23a5
+[7] https://towardsdatascience.com/build-a-rest-api-with-node-express-and-mongodb-937ff95f23a5
 [8] chaining callbacks: https://stackoverflow.com/questions/3884281/what-does-the-function-then-mean-in-javascript/31453579#31453579
+[9] async/await: http://thecodebarbarian.com/80-20-guide-to-async-await-in-node.js.html
+[A] promises: https://mongoosejs.com/docs/promises.html
+[B] promises: https://masteringjs.io/tutorials/mongoose/promise
+[C] mongoose exec(): https://stackoverflow.com/questions/31549857/mongoose-what-does-the-exec-function-do/31550321#31550321
+[D] empty objects: https://stackoverflow.com/questions/11480769/how-can-i-check-if-a-json-is-empty-in-nodejs/11480826#11480826
 
 */
 
@@ -37,7 +42,7 @@ let handler = {};
 
 handler.rm = async function () {
 // removes all the games from the database
-	await model.deleteMany({});
+	await model.deleteMany({}).exec();	// exec() returns promise (refs [9] & [C])
 }
 
 
@@ -61,26 +66,23 @@ handler.add = async function(games) {
 
 		// checks first if the game exist to avoid document duplication in db:
 
-		// Note:
-		// Waits until checking is done to determine if the game is to be saved
-		// or if there is nothing to do because it is already in the database.
-		// The method exec() enable us to achive that.
-		const gm = await model.exists(games).exec();
 
-		if (gm != null)
-		{
-			console.log(`game exist in db`);
-		}
-		else
-		{
-			const game = new model(games);
-			const g = await game.save();
+		// Note: model.exists().exec() returns a Promise
+		await model.exists(games).exec().then( async function(gm) {
 
-			if (g != null)
-				console.log(`saved game in db`);
+			if (gm != null)
+			{
+				console.info(`game exist in db`);
+			}
 			else
-				console.error(`save game in db failed`);
-		}
+			{
+				const game = new model(games);
+				// Note: game.save() returns a Promise
+				await game.save().then( () => {
+					console.info(`saved game in db`);
+				});
+			}
+		});
 	}
 };
 
@@ -88,18 +90,24 @@ handler.add = async function(games) {
 handler.find = async function(req, res, key = {name: req.params.name}) {
 // fetches game(s) matching name in the database by default
 
-	await model.find(key).exec().then( (err, obj) => {
+	// Note: model.find().exec() returns a Promise
+	await model.find(key).exec().then( (game) => {
 
-		if (err)
-		{
-			console.error(`failed to find game(s) in database`);
-			res.send(err);
-		}
-		else
+		if (Object.keys(game).length != 0)	// note: based on ref[D]
 		{
 			console.info(`found game(s) in database successfully!`);
-			res.send(obj);
+			res.send(game);
 		}
+		else // (find() returned an empty object `game' because it doesn't exist)
+		{
+			console.info(`game is not in the database`);
+			res.send('game is not in the database');
+		}
+
+	}).catch( (error) => {
+
+		console.error(`error while searching for game(s)`);
+		error.stack;
 	});
 
 };
@@ -110,9 +118,17 @@ handler.put = async function(req, res, filter = {name: req.params.name}) {
 
 	const update = req.body;
 	await model.findOneAndUpdate(filter, update).exec();
-	await model.findOne(filter).exec();
-	console.info(`updated game successfully!`);
-	res.send('game has been updated successfully');
+	await model.findOne(filter).exec().then( () => {
+
+		console.info(`updated game successfully!`);
+		res.send('game has been updated successfully');
+
+	}).catch( (error) => {
+
+		console.error(`error while updating game!`);
+		error.stack;
+
+	});
 
 };
 
@@ -120,9 +136,17 @@ handler.put = async function(req, res, filter = {name: req.params.name}) {
 handler.delete = async function(req, res, filter = {name: req.params.name}) {
 // deletes the first game that matches the filter
 
-	await model.findOneAndDelete(filter).exec();
-	console.info(`deleted game successfully!`);
-	res.send('game has been deleted successfully');
+	await model.findOneAndDelete(filter).exec().then( () => {
+
+		console.info(`deleted game successfully!`);
+		res.send('game has been deleted successfully');
+
+	}).catch( (error) => {
+
+		console.error(`error while deleting game!`);
+		error.stack;
+
+	});
 
 };
 
@@ -136,5 +160,6 @@ module.exports = handler;
  * [ ] add code to prevent adding a game with the same name as an existing game in the
  *     database. It seems that the exists() method inspects the game properties
  *     thoroughly so that if there is one mismatch it considers the game as new.
+ * [x] double check async/await code
  *
  */
