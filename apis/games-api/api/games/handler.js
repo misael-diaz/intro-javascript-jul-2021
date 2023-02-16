@@ -46,7 +46,7 @@ handler.rm = async () => {
 }
 
 
-handler.add = async (req, res, games) => {
+handler.add = async (games, req = {}, res = {}) => {
 // adds game(s) to the database db (NOTE: does not check if the data is already in the db)
 
 	if (games instanceof Array)
