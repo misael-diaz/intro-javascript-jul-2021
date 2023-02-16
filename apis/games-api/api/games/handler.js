@@ -46,7 +46,7 @@ handler.rm = async function () {
 }
 
 
-handler.add = async function(games) {
+handler.add = async function(req, res, games) {
 // adds game(s) to the database db (NOTE: does not check if the data is already in the db)
 
 	if (games instanceof Array)
@@ -67,22 +67,27 @@ handler.add = async function(games) {
 		// checks first if the game exist to avoid document duplication in db:
 
 
-		// Note: model.exists().exec() returns a Promise
-		await model.exists(games).exec().then( async function(gm) {
+		const key = { name: req.body.name };
+		// Note: model.findOne().exec() returns a Promise
+		await model.findOne(key).exec().then( async function(gm) {
 
 			if (gm != null)
 			{
 				console.info(`game exist in db`);
+				res.send('there is a game with the same name in the db');
 			}
 			else
 			{
 				const game = new model(games);
 				// Note: game.save() returns a Promise
-				await game.save().then( () => {
+				await game.save().then( (g) => {
 					console.info(`saved game in db`);
+					res.send(g);
 				});
 			}
+
 		});
+
 	}
 };
 
@@ -157,7 +162,7 @@ module.exports = handler;
 
 /*
  * TODO:
- * [ ] add code to prevent adding a game with the same name as an existing game in the
+ * [x] add code to prevent adding a game with the same name as an existing game in the
  *     database. It seems that the exists() method inspects the game properties
  *     thoroughly so that if there is one mismatch it considers the game as new.
  * [x] double check async/await code

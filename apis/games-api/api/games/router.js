@@ -37,7 +37,7 @@ handler.rm();
 
 
 // inserts games to the database
-handler.add(games);
+handler.add({}, {}, games);
 
 
 // fetches all games from the database upon request
@@ -70,8 +70,7 @@ http://localhost:8080/api/game/game
 app.post("/game", (req, res) => {
 
 	const game = req.body;
-	handler.add(game);
-	res.json(game);
+	handler.add(req, res, game);
 
 });
 
